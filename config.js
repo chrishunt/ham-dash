@@ -1,111 +1,127 @@
-const disableSetup = false;
-var topBarCenterText = `VA3HDL - FN04ga`;
+// CUT START
+var disableSetup = true; // Manually set to true to disable setup page menu option
+var topBarCenterText = "K2MMT - DM14tg";
 
-// Grid layout
-var layout_cols = 4;
+// Grid layout desired
+var layout_cols = 6;
 var layout_rows = 3;
 
 // Menu items
-// Structure is as follows HTML Color code, Option, target URL, scaling 1=Original Size, side (optional, nothing is Left, "R" is Right)
+// Structure is as follows: HTML Color code, Option, target URL, scaling 1=Original Size, side (optional, nothing is Left, "R" is Right)
 // The values are [color code, menu text, target link, scale factor, side],
 // add new lines following the structure for extra menu options. The comma at the end is important!
-var aURL = [
-  ["2196F3", "CLUBLOG", "https://clublog.org/livestream/VA3HDL", "1.7"],
+var aURL = [];
+
+// Feed items
+// Structure is as follows: target URL
+// The values are [target link]
+var aRSS = [
   [
-    "2196F3",
-    "CONTEST",
-    "https://www.contestcalendar.com/fivewkcal.html",
-    "1",
-  ],
-  ["2196F3", "DX CLUSTER", "https://dxcluster.ha8tks.hu/map/", "1"],
-  [
-    "2196F3",
-    "LIGHTNING",
-    "https://map.blitzortung.org/#3.87/36.5/-89.41",
-    "1",
-    "R",
-  ],
-  ["2196F3", "PISTAR", "http://pi-star.local/", "1.2"],
-  [
-    "2196F3",
-    "RADAR",
-    "https://weather.gc.ca/?layers=alert,radar&center=43.39961001,-78.53212031&zoom=6&alertTableFilterProv=ON",
-    "1",
-    "R"
-  ],
-  ["2196F3", "TIME.IS", "https://time.is/", "1", "R"],
-  [
-    "2196F3",
-    "WEATHER",
-    "https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=44.0157&lon=-79.4591&zoom=5",
-    "1",
-    "R",
-  ],
-  [
-    "2196F3",
-    "WINDS",
-    "https://earth.nullschool.net/#current/wind/surface/level/orthographic=-78.79,44.09,3000",
-    "1",
-    "R",
-  ],
+    "https://bitcoinmagazine.com/feed",
+    60
+  ]
 ];
 
-// Dashboard items
-// Structure is Title, Image Source URL
-// [Title, Image Source URL],
+// Dashboard Tiles items
+// Tile Structure is Title, Source URL
+// To display a website on the tiles use "iframe|" keyword before the tile URL
+// [Title, Source URL],
 // the comma at the end is important!
-// You can't add more items because there are only 12 placeholders on the dashboard
-// but you can replace the titles and the images with anything you want.
 var aIMG = [
-  ["RADAR", "https://radar.weather.gov/ridge/standard/CONUS_loop.gif"],
   [
-    "LOCAL RADAR",
-    "https://radar.weather.gov/ridge/standard/KNQA_loop.gif",
+    "BTC 1 HOUR",
+    "iframe|https://s.tradingview.com/widgetembed/?frameElementId=tradingview_btcusd&symbol=COINBASE:BTCUSD&interval=60&hide_top_toolbar=1&theme=dark&style=1"
+  ],
+  [
+    "S&P 1 HOUR",
+    "iframe|https://s.tradingview.com/widgetembed/?frameElementId=tradingview_btcusd&symbol=AMEX:SPY&interval=60&hide_top_toolbar=1&theme=dark&style=1"
+  ],
+  [
+    "BTC 15 MINUTES",
+    "iframe|https://s.tradingview.com/widgetembed/?frameElementId=tradingview_btcusd&symbol=COINBASE:BTCUSD&interval=1&hide_top_toolbar=1&theme=dark&style=1"
+  ],
+  [
+    "S&P 15 MINUTES",
+    "iframe|https://s.tradingview.com/widgetembed/?frameElementId=tradingview_btcusd&symbol=AMEX:SPY&interval=1&hide_top_toolbar=1&theme=dark&style=1"
+  ],
+  [
+    "",
+    "https://www.hamqsl.com/solarmuf.php"
+  ],
+  [
+    "",
+    "https://www.hamqsl.com/solar101vhf.php"
+  ],
+  [
+    "SATELLITE USA",
+    "https://cdn.star.nesdis.noaa.gov/GOES19/GLM/CONUS/EXTENT3/GOES19-CONUS-EXTENT3-625x375.gif"
+  ],
+  [
+    "SATELLITE LOCAL",
+    "https://cdn.star.nesdis.noaa.gov/GOES19/GLM/SECTOR/psw/EXTENT3/GOES19-PSW-EXTENT3-600x600.gif"
+  ],
+  [
+    "RADAR",
+    "https://radar.weather.gov/ridge/standard/CONUS_loop.gif"
+  ],
+  [
+    "RADAR LOCAL",
+    "https://radar.weather.gov/ridge/standard/KSOX_loop.gif"
+  ],
+  [
+     "RADAR LOCAL",
+     "iframe|https://embed.windy.com/embed2.html?lat=34.3&lon=-116.4&detailLat=34.3&detailLon=-116.4&zoom=6&hourly=1&metricTemp=%C2%B0F&metricWind=mph&marker=true&overlay=radar&play=true"
   ],
   [
     "NOAA D-RAP",
-    "https://services.swpc.noaa.gov/images/animations/d-rap/global/d-rap/latest.png",
-  ],
-  [
-    "ISS POSITION",
-    "https://www.heavens-above.com/orbitdisplay.aspx?icon=iss&width=600&height=300&mode=M&satid=25544",
-  ],
-  [
-    "SATELLITE CAN",
-    "https://cdn.star.nesdis.noaa.gov/GOES16/GLM/SECTOR/can/EXTENT3/GOES16-CAN-EXTENT3-1125x560.gif",
-  ],
-  [
-    "SATELLITE CGL",
-    "https://cdn.star.nesdis.noaa.gov/GOES16/GLM/SECTOR/cgl/EXTENT3/GOES16-CGL-EXTENT3-600x600.gif",
+    "https://services.swpc.noaa.gov/images/animations/d-rap/global/d-rap/latest.png"
   ],
   [
     "LIGHTNING",
-    "https://images.lightningmaps.org/blitzortung/america/index.php?animation=usa",
+    "https://images.lightningmaps.org/blitzortung/america/index.php?animation=usa"
   ],
   [
     "LIGHTNING LOCAL",
-    "https://www.blitzortung.org/en/Images/image_b_ny.png",
+    "https://www.blitzortung.org/en/Images/image_b_ca.png"
   ],
-  ["YOUTUBE EXAMPLE", "iframe|https://www.youtube.com/embed/fzPFaXAV_2Y?autoplay=1&mute=1"],
   [
-    "WEBSITE EXAMPLE",
-    "iframe|https://globe.adsbexchange.com/?airport=YYZ",
+    "WIND LOCAL",
+    "iframe|https://embed.windy.com/embed2.html?lat=34.3&lon=-116.4&detailLat=34.3&detailLon=-116.4&zoom=6&hourly=1&metricTemp=%C2%B0F&metricWind=mph&marker=true"
   ],
-  ["VIDEO EXAMPLE", "https://himawari8.nict.go.jp/movie/720/20240611_pifd.mp4"],
-  ["HF PROPAGATION",
-    "https://www.hamqsl.com/solar101vhf.php"],
+  [
+     "GUSTS LOCAL",
+     "iframe|https://embed.windy.com/embed2.html?lat=34.3&lon=-116.4&detailLat=34.3&detailLon=-116.4&zoom=6&hourly=1&metricTemp=%C2%B0F&metricWind=mph&marker=true&overlay=gust&play=true"
+  ],
+  [
+     "TEMP LOCAL",
+     "iframe|https://embed.windy.com/embed2.html?lat=34.3&lon=-116.4&detailLat=34.3&detailLon=-116.4&zoom=6&hourly=1&metricTemp=%C2%B0F&metricWind=mph&marker=true&overlay=temp"
+  ],
+  [
+    "WX LOCAL",
+    "iframe|https://www.meteoblue.com/en/weather/widget/daily/landers_united-states_5364967?geoloc=fixed&days=7&tempunit=FAHRENHEIT&windunit=MILE_PER_HOUR&precipunit=INCH&coloured=coloured&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=1&winddirection=0&uv=1&humidity=0&precipitation=0&precipitationprobability=1&spot=1&pressure=0&layout=dark"
+  ],
 ];
 
-// Image rotation intervals in milliseconds per tile - If the line below is commented, all tiles will be rotated every 30000 milliseconds (30s)
+// Image rotation intervals in milliseconds per tile - If the line below is commented, tiles will be rotated every 5000 milliseconds (5s)
 var tileDelay = [
-  11200,10000,11000,10100,
-  10200,10500,10300,10600,
-  30400,60700,60900,10800
+  600000,
+  602000,
+  605000,
+  608000,
+  602000,
+  617000,
+  310000,
+  315000,
+  320000,
+  301500,
+  613000,
+  313000,
+  309000,
+  312000,
+  306000,
+  309000,
+  308550,
+  603500,
 ];
 
-// RSS feed items
-// Structure is [feed URL, refresh interval in minutes]
-var aRSS = [
-  ["https://www.amsat.org/feed/", 60],           // Example RSS feed, refresh every 60 minutes
-  ["https://daily.hamweekly.com/atom.xml", 120], // Example Atom feed, refresh every 120 minutes
-  ];
+// CUT END
